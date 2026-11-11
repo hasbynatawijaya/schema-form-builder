@@ -1,0 +1,22 @@
+/* Renderer styles. All classes are prefixed sfb- so they don't clash with the host page. */
+.sfb-form { display: flex; flex-direction: column; gap: 1.25rem; max-width: 36rem; font: inherit; color: inherit; }
+.sfb-title { font-size: 1.25rem; font-weight: 600; margin: 0; }
+.sfb-field { display: flex; flex-direction: column; gap: 0.35rem; }
+.sfb-field-checkbox { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 0.5rem; }
+.sfb-field-checkbox .sfb-help, .sfb-field-checkbox .sfb-error { grid-column: 2; }
+.sfb-field label { font-weight: 500; }
+.sfb-required { font-weight: 400; color: var(--sfb-muted, #555); }
+.sfb-help { margin: 0; font-size: 0.875rem; color: var(--sfb-muted, #555); }
+.sfb-error { margin: 0; font-size: 0.875rem; font-weight: 600; color: var(--sfb-danger, #b00020); }
+.sfb-field input:not([type="checkbox"]), .sfb-field select, .sfb-field textarea {
+  font: inherit; padding: 0.5rem 0.6rem; border: 1px solid var(--sfb-border, #767676); border-radius: 6px; background: var(--sfb-input-bg, #fff); color: inherit;
+}
+.sfb-field input[aria-invalid="true"], .sfb-field select[aria-invalid="true"], .sfb-field textarea[aria-invalid="true"] { border: 2px solid var(--sfb-danger, #b00020); }
+.sfb-field input:focus-visible, .sfb-field select:focus-visible, .sfb-field textarea:focus-visible, .sfb-submit:focus-visible, .sfb-summary a:focus-visible {
+  outline: 3px solid var(--sfb-focus, #1a5fb4); outline-offset: 2px;
+}
+.sfb-summary { border: 2px solid var(--sfb-danger, #b00020); border-radius: 6px; padding: 0.75rem 1rem; }
+.sfb-summary p { margin: 0 0 0.5rem; font-weight: 600; }
+.sfb-summary ul { margin: 0; padding-left: 1.25rem; }
+.sfb-summary a { color: var(--sfb-danger, #b00020); }
+.sfb-submit { align-self: flex-start; font: inherit; padding: 0.55rem 1.1rem; border: 0; border-radius: 6px; background: var(--sfb-accent, #1a1a1a); color: var(--sfb-accent-fg, #fff); cursor: pointer; }

@@ -1,0 +1,82 @@
+:root {
+  --bg: #ffffff; --surface: #f6f6f4; --text: #1b1b1b; --muted: #595959; --border: #d4d4d0;
+  --accent: #1b1b1b; --accent-fg: #ffffff; --focus: #1a5fb4; --danger: #b00020; --selected: #e8eefb;
+  color-scheme: light;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.5;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161616; --surface: #202020; --text: #ececec; --muted: #a8a8a8; --border: #3a3a3a;
+    --accent: #ececec; --accent-fg: #161616; --focus: #8ab4f8; --danger: #ff8a80; --selected: #23304a;
+    color-scheme: dark;
+    --sfb-muted: #a8a8a8; --sfb-danger: #ff8a80; --sfb-border: #8a8a8a; --sfb-input-bg: #202020; --sfb-accent: #ececec; --sfb-accent-fg: #161616; --sfb-focus: #8ab4f8;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.muted { color: var(--muted); }
+.row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.mono, .code { font-family: ui-monospace, Menlo, monospace; font-size: 0.85rem; }
+
+.app { max-width: 1200px; margin: 0 auto; padding: 1rem; display: flex; flex-direction: column; gap: 1rem; }
+.topbar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; justify-content: space-between; }
+.title-input input { font-size: 1.25rem; font-weight: 600; border: 1px solid transparent; border-radius: 6px; padding: 0.25rem 0.5rem; background: transparent; min-width: 0; width: 100%; }
+.title-input { flex: 1 1 16rem; }
+.app-name { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 0; }
+.title-input input:hover { border-color: var(--border); }
+.notice:empty { display: none; }
+.notice { padding: 0.5rem 0.75rem; background: var(--surface); border-radius: 6px; }
+.issues { border: 2px solid var(--danger); border-radius: 6px; padding: 0.5rem 1rem; }
+.issues p { margin: 0; font-weight: 600; }
+
+.button { padding: 0.4rem 0.8rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); cursor: pointer; }
+.button:hover:not(:disabled) { background: var(--surface); }
+.button:disabled { opacity: 0.55; cursor: not-allowed; }
+.button-block { width: 100%; text-align: left; }
+.icon-button { border: 0; background: transparent; cursor: pointer; padding: 0.25rem 0.5rem; border-radius: 6px; font-size: 1.1rem; line-height: 1; }
+.icon-button:hover { background: var(--surface); }
+
+.tabs { display: flex; gap: 0.25rem; border: 1px solid var(--border); border-radius: 8px; padding: 0.2rem; }
+.tab { border: 0; background: transparent; padding: 0.35rem 0.9rem; border-radius: 6px; cursor: pointer; }
+.tab[aria-selected="true"] { background: var(--accent); color: var(--accent-fg); }
+
+.panel-title { font-size: 0.95rem; font-weight: 600; margin: 0 0 0.75rem; }
+.build { display: grid; grid-template-columns: 12rem 1fr 20rem; gap: 1rem; align-items: start; }
+@media (max-width: 900px) { .build { grid-template-columns: 1fr; } }
+.palette ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.35rem; }
+
+.canvas { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+.canvas-empty { color: var(--muted); }
+.canvas-item { display: flex; align-items: center; gap: 0.25rem; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); padding: 0.25rem; }
+.canvas-item.is-selected { border-color: var(--focus); background: var(--selected); }
+.canvas-item.is-dragging { opacity: 0.85; box-shadow: 0 4px 16px rgb(0 0 0 / 0.15); position: relative; z-index: 1; }
+.handle { border: 0; background: transparent; cursor: grab; padding: 0.4rem; border-radius: 6px; touch-action: none; }
+.handle:hover { background: var(--surface); }
+.canvas-select { flex: 1; display: flex; flex-direction: column; align-items: flex-start; border: 0; background: transparent; text-align: left; padding: 0.35rem 0.5rem; cursor: pointer; border-radius: 6px; min-width: 0; }
+.canvas-label { font-weight: 500; overflow-wrap: anywhere; }
+.canvas-meta { font-size: 0.8rem; color: var(--muted); }
+
+.inspector-panel { border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
+.inspector { display: flex; flex-direction: column; gap: 0.85rem; }
+.control { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.9rem; }
+.control input:not([type="checkbox"]), .control select, .control textarea { padding: 0.4rem 0.5rem; border: 1px solid var(--muted); border-radius: 6px; background: var(--bg); min-width: 0; }
+.control-inline { flex-direction: row; align-items: center; gap: 0.5rem; }
+.control-row { display: flex; gap: 0.5rem; border: 0; padding: 0; margin: 0; }
+.control-row legend { font-size: 0.9rem; margin-bottom: 0.25rem; }
+.control-row .control { flex: 1; }
+.control-group { border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem; margin: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+.control-group legend { font-size: 0.9rem; font-weight: 600; padding: 0 0.25rem; }
+.control-error { color: var(--danger); font-size: 0.85rem; }
+.conditions { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+.condition { display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem; align-items: end; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+.condition .icon-button { justify-self: end; }
+
+.preview { display: grid; grid-template-columns: minmax(0, 36rem) minmax(0, 1fr); gap: 2rem; align-items: start; }
+@media (max-width: 900px) { .preview { grid-template-columns: 1fr; } }
+.code { background: var(--surface); border-radius: 8px; padding: 0.75rem; overflow: auto; max-height: 28rem; margin: 0; }
+.json-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media (max-width: 900px) { .json-panel { grid-template-columns: 1fr; } }
+.json-panel section { display: flex; flex-direction: column; gap: 0.6rem; }
